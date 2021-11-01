@@ -240,18 +240,21 @@ export const SettingsForm: React.FC = () => {
               setSettings((prevSettings) => {
                 const numberOfRounds =
                   calculateNumberOfRounds(durationSettings);
-                const bigBlinds = calculateBigBlinds(
+                const newBigBlinds = calculateBigBlinds(
                   DEFAULT_TOTAL_NUMBER_OF_CHIPS,
                   numberOfRounds
                 );
 
+                const bigBlinds =
+                  prevSettings.bigBlinds.length === 0 ||
+                  prevSettings.bigBlinds.length !== newBigBlinds.length
+                    ? newBigBlinds
+                    : prevSettings.bigBlinds;
+
                 return {
                   ...prevSettings,
                   durationSettings,
-                  bigBlinds:
-                    prevSettings.bigBlinds.length === 0
-                      ? bigBlinds
-                      : prevSettings.bigBlinds,
+                  bigBlinds,
                 };
               });
               setAccordionOpenState({

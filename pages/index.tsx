@@ -23,7 +23,7 @@ const Home: NextPage = () => {
               theme.colorScheme === "dark"
                 ? theme.colors.dark[8]
                 : theme.colors.gray[0],
-            height: "calc(100vh - 60px)",
+            minHeight: "calc(100vh - 60px)",
           },
         })}
       >

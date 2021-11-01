@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const Router = useRouter();
   const [isMounted, setIsMounted] = React.useState(false);
   const [settings, setSettings] = React.useState<Settings>();
+
   React.useEffect(() => {
     setIsMounted(true);
     if (window && window.localStorage) {
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
         Router.replace("/");
       }
     }
-  }, []);
+  }, [Router]);
 
   if (!isMounted || !settings) {
     return null;
@@ -43,7 +44,7 @@ const Home: NextPage = () => {
               theme.colorScheme === "dark"
                 ? theme.colors.dark[8]
                 : theme.colors.gray[0],
-            height: "calc(100vh - 60px)",
+            minHeight: "calc(100vh - 60px)",
           },
         })}
       >

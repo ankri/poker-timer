@@ -46,19 +46,21 @@ export const PlayDashboard: React.FC<{ settings: Settings }> = ({
       date.getSeconds() + settings.durationSettings.changeEveryXMinutes * 60
     );
     return date;
-  }, []);
+  }, [settings.durationSettings.changeEveryXMinutes]);
 
   const { minutes, seconds, isRunning, restart, resume, pause } = useTimer({
     expiryTimestamp,
     autoStart: true,
     onExpire: () => {
-      setBlindRound((currentRound) => currentRound + 1);
-      const time = new Date();
-      time.setSeconds(
-        time.getSeconds() +
-          60 * settings.durationSettings?.changeEveryXMinutes ?? 20 * 60
-      );
-      restart(time);
+      setTimeout(() => {
+        const time = new Date();
+        time.setSeconds(
+          time.getSeconds() + settings.durationSettings.changeEveryXMinutes + 60
+        );
+
+        restart(time);
+        setBlindRound((currentRound) => currentRound + 1);
+      });
     },
   });
 
